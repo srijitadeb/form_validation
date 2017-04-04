@@ -29,7 +29,7 @@
 			<form class="form-horizontal formBackground"  ng-show="showDiv" name="myForm" role="form" ng-submit="submitForm()" novalidate>
 				<h3 class="text-center"><strong ng-show="showDiv">Form Name:</strong><span class="labelHeading">{{item.form_name}}</span></h3>
 				<hr ng-show="showDiv"></hr>
-				<div ng-repeat="field in item.form_fields" class="col-md-12">
+				<div ng-repeat="(i,field) in item.form_fields" class="col-md-12">
 					<ng-form name="form">
 					  <div ng-if="field.component=='textinput'" class="form-group">
 					    <label for="inputEmail3" class="control-label labelHeading">{{field.label}}</label> <span class="reqrd" ng-show="field.required == true">*</span>
@@ -53,7 +53,7 @@
 					  	</div> 
 					  	<div class="col-sm-12">
 							<label class="radio" ng-repeat="radiobtn in field.options">
-							  	<input type="radio" name="inlineRadioOptions" ng-model="field.autoselect" ng-checked="field.autoselect.indexOf(radiobtn) > -1" value="{{field.autoselect}}" ng-readonly="{{field.editable}}" ng-required="{{field.required}}"> {{radiobtn}}
+							  	<input type="radio" name="{{'bn'+i}}" ng-model="field.autoselect" ng-checked="field.autoselect.indexOf(radiobtn) > -1" value="{{field.autoselect}}"  ng-disabled="{{field.editable}}" ng-required="{{field.required}}"> {{radiobtn}}
 							</label>
 						</div>
 					  </div>
@@ -64,7 +64,7 @@
 					  	</div>
 					  	<div class="col-sm-12">
 							<label class="checkbox" ng-repeat="checkbox in field.options">
-							  	<input type="checkbox"  ng-checked="field.autoselect.indexOf(checkbox) > -1" value="{{checkbox}}" ng-readonly="{{field.editable}}" ng-required="{{field.required}}"> {{checkbox}}
+							  	<input type="checkbox"  ng-checked="field.autoselect.indexOf(checkbox) > -1" value="{{checkbox}}"  ng-disabled="{{field.editable}}" ng-required="{{field.required}}"> {{checkbox}}
 							</label>
 						</div>
 					  </div>
@@ -75,7 +75,7 @@
 					  	</div> 
 					  	<div>
 							<select name="multipleSelect" class="selectBox" id="multipleSelect" ng-model="field.autoselect" multiple>
-							      <option ng-repeat="selectBox in field.options" value="{{selectBox}}">{{selectBox}}</option>
+							      <option ng-repeat="selectBox in field.options"  ng-disabled="{{field.editable}}" value="{{selectBox}}">{{selectBox}}</option>
 							</select>
 						</div>
 					  </div>
